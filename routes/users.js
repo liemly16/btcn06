@@ -19,12 +19,11 @@ router.get("/login", function(req, res, next) {
       if (err) {
         res.send(err);
       }
-
-      console.log(user);
+      
       const userJSON = user.toJSON();
       // generate a signed son web token with the contents of user object and return it in the response
       const token = jwt.sign(JSON.stringify(userJSON), "your_jwt_secret");
-      return res.json({ userJSON, token });
+      return res.json({ result: { user: userJSON, token } });
     });
   })(req, res);
 });
